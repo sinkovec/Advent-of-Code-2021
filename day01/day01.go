@@ -2,15 +2,22 @@ package day01
 
 import (
 	"bufio"
+	"fmt"
 	"log"
 	"os"
 )
 
-func run_one() int {
+func Run() {
+	fmt.Println("Day 01")
+	fmt.Printf("\tOne: %d\n", runOne())
+	fmt.Printf("\tTwo: %d\n", runTwo())
+}
+
+func runOne() int {
 	return 1
 }
 
-func run_two() int {
+func runTwo() int {
 	return 2
 }
 
