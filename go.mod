@@ -1,0 +1,1 @@
+module github.com/sinkovec/Advent-of-Code-2021
