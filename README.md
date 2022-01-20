@@ -12,7 +12,7 @@ Run `go test ./... -v` to run the tests, and `go run .` to get the solutions for
 | Day | Task 1 | Task 2 |
 | --- | ------ | ------ |
 |   1 |      ✓ |      ✓ |
-|   2 |        |        |
+|   2 |      ✓ |      ✓ |
 |   3 |        |        |
 |   4 |        |        |
 |   5 |        |        |
