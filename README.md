@@ -13,8 +13,8 @@ Run `go test ./... -v` to run the tests, and `go run .` to get the solutions for
 | --- | ------ | ------ |
 |   1 |      ✓ |      ✓ |
 |   2 |      ✓ |      ✓ |
-|   3 |        |        |
-|   4 |        |        |
+|   3 |      ✓ |      ✓ |
+|   4 |      ✓ |      ✓ |
 |   5 |        |        |
 |   6 |        |        |
 |   7 |        |        |
