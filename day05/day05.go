@@ -26,38 +26,56 @@ func Run() {
 }
 
 func runOne(data []Line) int {
-	data = sortLines(data)
-	xMax, yMax := getMax(data)
-	xMax++
-	yMax++
-	vents := make([][]int, xMax)
-	for i := range vents {
-		vents[i] = make([]int, yMax)
-	}
+	vents := getVentMap(data)
 	for _, line := range data {
 		start, end := line.start, line.end
 		if start.x != end.x && start.y != end.y {
 			continue
 		}
-		for i := start.x; i <= end.x; i++ {
-			for j := start.y; j <= end.y; j++ {
+		for i := start.y; i <= end.y; i++ {
+			for j := start.x; j <= end.x; j++ {
 				vents[i][j]++
 			}
 		}
 	}
-	result := 0
-	for i := 0; i < xMax; i++ {
-		for j := 0; j < yMax; j++ {
-			if vents[i][j] >= 2 {
-				result++
-			}
-		}
-	}
-	return result
+	return result(vents)
 }
 
 func runTwo(data []Line) int {
-	return 0
+	vents := getVentMap(data)
+	for _, line := range data {
+		start, end := line.start, line.end
+		if start.x != end.x && start.y != end.y {
+			if start.y < end.y {
+				for i := 0; i <= end.x-start.x; i++ {
+					vents[start.y+i][start.x+i]++
+				}
+			} else {
+				for i := 0; i <= end.x-start.x; i++ {
+					vents[start.y-i][start.x+i]++
+				}
+			}
+		} else {
+			for i := start.y; i <= end.y; i++ {
+				for j := start.x; j <= end.x; j++ {
+					vents[i][j]++
+				}
+			}
+		}
+	}
+	return result(vents)
+}
+
+func getVentMap(data []Line) [][]int {
+	data = sortLines(data)
+	xMax, yMax := getMax(data)
+	xMax++
+	yMax++
+	result := make([][]int, yMax)
+	for i := range result {
+		result[i] = make([]int, xMax)
+	}
+	return result
 }
 
 func sortLines(data []Line) []Line {
@@ -75,6 +93,13 @@ func sortLines(data []Line) []Line {
 				data[i].start.x = data[i].end.x
 				data[i].end.x = tmp
 			}
+		} else if data[i].start.x > data[i].end.x {
+			tmp = data[i].start.x
+			data[i].start.x = data[i].end.x
+			data[i].end.x = tmp
+			tmp = data[i].start.y
+			data[i].start.y = data[i].end.y
+			data[i].end.y = tmp
 		}
 	}
 	return data
@@ -91,6 +116,18 @@ func getMax(data []Line) (int, int) {
 		}
 	}
 	return xMax, yMax
+}
+
+func result(vents [][]int) int {
+	result := 0
+	for i := 0; i < len(vents); i++ {
+		for j := 0; j < len(vents[i]); j++ {
+			if vents[i][j] >= 2 {
+				result++
+			}
+		}
+	}
+	return result
 }
 
 func transform(data string) []Line {

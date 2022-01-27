@@ -24,5 +24,5 @@ func Test_Day05_One(t *testing.T) {
 }
 
 func Test_Day05_Two(t *testing.T) {
-	assert.Equal(t, 0, runTwo(data))
+	assert.Equal(t, 12, runTwo(data))
 }
