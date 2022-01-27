@@ -2,14 +2,12 @@ package day06
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 
 	"github.com/sinkovec/Advent-of-Code-2021/util"
 )
 
 func Run() {
-	data := transform(util.ReadInput("day06/input.txt"))
+	data := util.ReadInts("day06/input.txt")
 	fmt.Println("Day 06")
 	fmt.Printf("\tOne: %d\n", runOne(data))
 	fmt.Printf("\tTwo: %d\n", runTwo(data))
@@ -25,7 +23,7 @@ func runTwo(data []int) int {
 
 func run(data []int, days int) int {
 	const TIMER_MAX = 9
-	var timer [TIMER_MAX]int
+	timer := make([]int, 9)
 	for _, v := range data {
 		timer[v]++
 	}
@@ -37,20 +35,5 @@ func run(data []int, days int) int {
 		timer[6] += newFishScore
 		timer[8] = newFishScore
 	}
-	result := 0
-	for _, v := range timer {
-		result += v
-	}
-	return result
-}
-
-func transform(data string) []int {
-	result := make([]int, 0)
-	for _, line := range strings.Split(data, "\n") {
-		for _, s := range strings.Split(line, ",") {
-			v, _ := strconv.Atoi(s)
-			result = append(result, v)
-		}
-	}
-	return result
+	return util.Sum(timer)
 }

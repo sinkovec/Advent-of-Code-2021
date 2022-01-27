@@ -2,14 +2,12 @@ package day01
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 
 	"github.com/sinkovec/Advent-of-Code-2021/util"
 )
 
 func Run() {
-	data := transform(util.ReadInput("day01/input.txt"))
+	data := util.ReadIntPerLine("day01/input.txt")
 	fmt.Println("Day 01")
 	fmt.Printf("\tOne: %d\n", runOne(data))
 	fmt.Printf("\tTwo: %d\n", runTwo(data))
@@ -35,13 +33,4 @@ func runTwo(data []int) int {
 		}
 	}
 	return numInc
-}
-
-func transform(data string) []int {
-	result := make([]int, 0)
-	for _, s := range strings.Split(data, "\n") {
-		i, _ := strconv.Atoi(s)
-		result = append(result, i)
-	}
-	return result
 }
